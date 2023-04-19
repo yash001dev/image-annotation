@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
-const ImageAnnotator = ({ imageUrl, onAnnotate }) => {
+const ImageAnnotator = ({ imageUrl, onAnnotate, commentMode }) => {
+  console.log("COMMENT MODE:", commentMode);
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -57,8 +58,10 @@ const ImageAnnotator = ({ imageUrl, onAnnotate }) => {
       width: endX - startX,
       height: endY - startY
     };
-    setAnnotations((prevAnnotations) => [...prevAnnotations, annotation]);
-    drawMarker(context, startX, startY, annotations.length + 1);
+    if (commentMode) {
+      setAnnotations((prevAnnotations) => [...prevAnnotations, annotation]);
+      drawMarker(context, startX, startY, annotations.length + 1);
+    }
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ImageAnnotator from "./ImageAnnotator";
 
-const ImageAnnotationApp = () => {
+const ImageAnnotationApp = ({ commentMode }) => {
   const [annotations, setAnnotations] = useState([]);
   const imageUrl =
     "https://cdn.pixabay.com/photo/2023/04/16/09/54/bird-7929733_960_720.jpg";
@@ -12,12 +12,16 @@ const ImageAnnotationApp = () => {
 
   return (
     <div>
-      <ImageAnnotator imageUrl={imageUrl} onAnnotate={handleAnnotate} />
-      <ul>
+      <ImageAnnotator
+        commentMode={commentMode}
+        imageUrl={imageUrl}
+        onAnnotate={handleAnnotate}
+      />
+      {/* <ul>
         {annotations.map((annotation, index) => (
           <li key={index}>{JSON.stringify(annotation)}</li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };
